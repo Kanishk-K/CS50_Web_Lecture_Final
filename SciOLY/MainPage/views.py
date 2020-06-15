@@ -3,4 +3,4 @@ from django.shortcuts import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Begin Final Project")
+    return render(request, "MainPage/index.html")
