@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
         <script src="{% static 'MainPage/script.js' %}"></script>
     </head>
-    <body>
+    <body class="bg-light">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
             <a href="#">Apply For The Team</a>
@@ -33,6 +33,50 @@
                             <h1 class="display-4 text-white">Eastview Science Olympiad</h1>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row mx-0" style="background:#fff3cd;">
+                <div class="col-1 px-0 align-self-start">
+                    <img src="{% static 'MainPage/Alert.png'%}" class="Alert img-responsive w-100">
+                </div>
+                <div class="col-11 px-0 align-self-end align-items-center">
+                    <div class="alert alert-warning d-flex">
+                        <b>There's currently an alert present, please be cautious. Coronavirus has stopped the season and meetings have been adjourned</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
+            <h1 class="display title">Coaches and Team Captains</h1>
+        </div>
+        <div class="container-fluid px-0 mt-2 mb-4 bg-light">
+            <div class="row mx-0 d-flex justify-content-center">
+                <div class="col-4 align-self-center mt-5">
+                    <div class="row d-flex justify-content-center">
+                        <img src="{% static 'MainPage/Person.png' %}" class="img-responsive w-25">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <hr class="divider w-50">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <h1 class="display title">Username</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-5">
+            <h1 class="display title">Meet The Team!</h1>
+        </div>
+        <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-2">
+            <div class="row">
+                <div class="col">
+                    <span style="white-space: nowrap;">Choose A Team to Browse:</span>
+                </div>
+                <div class="col">
+                    <select>
+                        <option>Item1</option>
+                        <option>Item2</option>
+                    </select>
                 </div>
             </div>
         </div>
