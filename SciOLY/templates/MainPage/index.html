@@ -4,6 +4,7 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
         <script src="{% static 'MainPage/script.js' %}"></script>
     </head>
@@ -23,10 +24,15 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid bg-info">
-            <div class="row d-flex justify-content-center">
-                <div class="col-8">
-                    <img class="img-fluid w-100" src="{% static 'MainPage/Slideshow/Image1.jpg'%}">
+        <div class="container-fluid px-0">
+            <div class="row mx-0 bg-info d-flex justify-content-center" id="box-search">
+                <div class="col-sm-12 col-md-10 px-0">
+                    <div class="thumbnail text-center">
+                        <img src="{% static 'MainPage/Slideshow/Image1.jpg'%}" alt="" class="img-responsive w-75">
+                        <div class="caption">
+                            <h1 class="display-4 text-white">Eastview Science Olympiad</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

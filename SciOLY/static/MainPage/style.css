@@ -3,6 +3,10 @@
     width: 50px;
     height: auto;
 }
+.caption h1{
+  font-size: medium;
+  font-family: 'BioRhyme','serif';
+}
 /* sm */
 @media (min-width: 768px) {
     .Logo{
@@ -10,17 +14,26 @@
     }
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+    .caption h1{
+      font-size: large;
+    }
 }
 /* md */
 @media (min-width: 992px) {
     .Logo{
         width: 75px;
     }
+    .caption h1{
+      font-size: x-large;
+    }
 }
 /* lg */
 @media (min-width: 1200px) {
     .Logo{
         width: 75px;
+    }
+    .caption h1{
+      font-size: x-large;
     }
 }
 .sidenav {
@@ -52,4 +65,14 @@
   right: 10px;
   font-size: 36px;
   margin-left: 50px;
+}
+.thumbnail {
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  top: 90%;
+  left: 0;
+  width: 100%;
 }
