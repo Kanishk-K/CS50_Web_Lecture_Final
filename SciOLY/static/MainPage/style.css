@@ -1,0 +1,23 @@
+/* xs */
+.Logo{
+    width: 50px;
+    height: auto;
+}
+/* sm */
+@media (min-width: 768px) {
+    .Logo{
+        width: 75px;
+    }
+}
+/* md */
+@media (min-width: 992px) {
+    .Logo{
+        width: 75px;
+    }
+}
+/* lg */
+@media (min-width: 1200px) {
+    .Logo{
+        width: 75px;
+    }
+}

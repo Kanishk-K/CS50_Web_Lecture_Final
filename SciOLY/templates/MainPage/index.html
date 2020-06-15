@@ -3,12 +3,18 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
+        <script src="{% static 'MainPage/script.js' %}"></script>
     </head>
     <body>
         <div class="container-fluid bg-info">
-            <div class=col>
-                <img src="{% static 'MainPage/EVHS_Logo.png' %}">
+            <div class="row">
+                <div class="col align-self-start">
+                    <img src="{% static 'MainPage/EVHS_Logo.png' %}" class="Logo">
+                </div>
+                <div class="col align-self-end justify-content-end">
+                    <button class="Menu btn btn-info float-right"><img src="{% static 'MainPage/Menu.png' %}" class="Logo"></button>
+                </div>
             </div>
         </div>
 
