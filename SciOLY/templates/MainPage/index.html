@@ -16,13 +16,20 @@
     <body class="bg-light">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
-            <a href="#">Apply For The Team</a>
-            <a href="#">Login</a>
+            <a href="{% url 'apply' %}">Apply For The Team</a>
+            <a href="{% url 'login' %}">Login</a>
         </div>   
         <div class="container-fluid">
             <div class="row d-flex align-items-center bg-info">
                 <div class="col align-self-start">
                     <img src="{% static 'MainPage/EVHS_Logo.png' %}" class="Logo">
+                </div>
+                <div class="col align-self-center">
+                    {% if messages %}
+                        {% for message in messages%}
+                        <div class="alert alert-{{ message.tags }}">{{message}}</div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="col align-self-end justify-content-end">
                     <button class="Menu btn btn-info float-right"><img src="{% static 'MainPage/Menu.png' %}" class="Logo"></button>

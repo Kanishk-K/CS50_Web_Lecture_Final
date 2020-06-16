@@ -17,13 +17,17 @@ from django.contrib import admin
 from MainPage import views as MainPage
 from django.urls import path
 from django.conf.urls import url
+from users import views as users_view
+from django.contrib.auth import views as auth_views
 
 from django.conf import settings
 from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', MainPage.index),
+    path('', MainPage.index, name="MainPage"),
+    path('apply', users_view.register, name="apply"),
+    path('login', users_view.login, name="login"),
     path('UserInfo',MainPage.UserInfo),
 ]
 
