@@ -1,10 +1,12 @@
 {% load static %}
+{% csrf_token %}
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
         <script src="{% static 'MainPage/script.js' %}"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -77,9 +79,9 @@
                         Choose A Team
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <button class="Team dropdown-item" href="#">Team#1</button>
-                        <button class="Team dropdown-item" href="#">Team#2</button>
-                        <button class="Team dropdown-item" href="#">Team#3</button>
+                        {% for team in Teams %}
+                        <button class="Team dropdown-item" href="#">{{ team.name }}</button>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -90,7 +92,7 @@
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Choose A Team Member!
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="Users dropdown-menu" aria-labelledby="navbarDropdown">
                         <button class="Member dropdown-item" href="#">Person#1</button>
                         <button class="Member dropdown-item" href="#">Person#2</button>
                         <button class="Member dropdown-item" href="#">Person#3</button>
@@ -101,10 +103,10 @@
         <div class="container bg-light d-flex justify-content-center px-0 mt-2">
             <div class="UserInfo row d-none">
                 <div class="col-2 align-self-start d-flex justify-content-end">
-                    <img src="{% static 'MainPage/Person.png' %}" class="img-responsive w-50">
+                    <img src="" class="img-responsive w-50">
                 </div>
                 <div class="col-10 align-self-end d-flex justify-content-start" style="word-wrap: break-word;">
-                    <p>Hello, my name is test user, I am a member of the Eastview Science Olympiad Team. It's a really fun time to be a part of the team, the events are great and never are boring. Maybe you should join sometime.</p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -120,8 +122,8 @@
         </div>
         <div class="ListItem container bg-light px-0 align-items-start">
             <div class="Info row align-items-start d-none">
-                <div class="col-6 d-flex justify-content-center">
-                    <ul>
+                <div class="col-6 d-flex justify-content-center text-left">
+                    <ul class="Events">
                         <li>Item#1</li>
                         <li>Item#2</li>
                         <li>Item#3</li>
@@ -130,8 +132,8 @@
                         <li>Item#3</li>
                     </ul>
                 </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <ul>
+                <div class="col-6 d-flex justify-content-center text-left">
+                    <ul class="Awards">
                         <li>Item#1</li>
                         <li>Item#2</li>
                         <li>Item#3</li>

@@ -14,6 +14,8 @@ class Award(models.Model):
         return f"{self.name}"
 class Member(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profileimage = models.ImageField(default='/Person.png')
+    text = models.TextField(default="I am a member of the Eastview Science Olympiad Team. It's a really fun time to be a part of the team, the events are great and never are boring. Maybe you should join sometime.")
     events = models.ManyToManyField(Event)
     awards = models.ManyToManyField(Award)
 

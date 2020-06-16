@@ -16,9 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from MainPage import views as MainPage
 from django.urls import path
+from django.conf.urls import url
+
+from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPage.index),
     path('UserInfo',MainPage.UserInfo),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve , {
+            'document_root':settings.MEDIA_ROOT,
+        }),
+    ]
