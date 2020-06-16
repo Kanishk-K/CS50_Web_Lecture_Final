@@ -1,4 +1,6 @@
 /* xs */
+.dropdown-menu {display: block;visibility: hidden;opacity:0;transform: translateY(50px);transition:.5s ease all;}
+.dropdown-menu.show {display: block;visibility: visible;opacity:1;transform: translateY(0px);transition:.5s ease all;}
 .Logo{
     width: 50px;
     height: auto;
@@ -6,6 +8,13 @@
 .caption h1, .title{
   font-size: medium;
   font-family: 'BioRhyme','serif';
+}
+.under {
+  border-bottom: 3px dotted rgba(0,0,0,0.51);
+  padding-bottom: 1%;
+}
+Text{
+  font-size: medium;
 }
 hr {
   border: 0;
@@ -27,6 +36,16 @@ hr.divider {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
     .caption h1, .title{
+      font-size: x-large;
+    }
+    p{
+      font-size: large;
+    }
+    .under {
+      border-bottom: 4px dotted rgba(0,0,0,0.51);
+      padding-bottom: 1%;
+    }
+    Text{
       font-size: large;
     }
 }
@@ -38,6 +57,13 @@ hr.divider {
     .caption h1, .title{
       font-size: x-large;
     }
+    .under {
+      border-bottom: 5px dotted rgba(0,0,0,0.51);
+      padding-bottom: 1%;
+    }
+    Text{
+      font-size: x-large;
+    }
 }
 /* lg */
 @media (min-width: 1200px) {
@@ -45,6 +71,13 @@ hr.divider {
         width: 75px;
     }
     .caption h1, .title{
+      font-size: x-large;
+    }
+    .under {
+      border-bottom: 6px dotted rgba(0,0,0,0.51);
+      padding-bottom: 1%;
+    }
+    Text{
       font-size: x-large;
     }
 }
