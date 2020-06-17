@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
-        <script src="{% static 'Applications/Application.js' %}"></script>
+        <script src="{% static 'Applications/TeamManage.js' %}"></script>
         <script src="{% static 'MainPage/script.js' %}"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -43,44 +43,78 @@
             </div>
         </div>
         <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
-            <h1 class="display title">Active Applications</h1>
+            <h1 class="display title">Create a new Team?</h1>
         </div>
         <div class="container-fluid px-0 mb-4 bg-light">
             <div class="row mx-0 d-flex justify-content-center">
-                {% for applicant in Applicants %}
-                <div class="col-3 align-self-center mt-5 mx-2 bg-dark rounded d-flex justify-content-center">
+                <form method="POST" class="bg-dark rounded justify-content-center">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <div class="row mt-3 mx-0 justify-content-center align-items-center">
+                            <label class="TextfieldLabel text-white"></label>
+                            <input name="textfield" class="w-100 mx-5 rounded d-inline" rows="5" maxlength="64"></input>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <div class="row mt-3 mx-0 justify-content-center align-items-center">
+                            <button class="btn btn-outline-success" type="submit">Create Team</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr class="divider">
+            <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
+                <h1 class="display title">Modify Existing Teams?</h1>
+            </div>
+            <div class="row mx-0 d-flex justify-content-center">
+                {% for team in Teams %}
+                <div class="col-md-3 col-sm-6 align-self-center mt-3 mx-2 bg-dark rounded d-flex justify-content-center">
                     <div class="container-fluid">
                         <div class="row d-flex justify-content-center">
-                            <h3 class="username text-white mt-2">Applicant Name</h3>
+                            <h3 class="username text-white mt-2">Team Name</h3>
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <h3 class="username text-white">{{applicant.user.first_name}} {{applicant.user.last_name}}</h3>
+                            <h3 class="Teamname username text-white" data-teamname="{{team.name}}"><button class="RemoveTeam btn btn-outline-danger btn-sm mx-2 mb-2">Remove</button>{{team.name}}</h3>
                         </div>
                         <div class="row">
                             <hr class="divider bg-dark mt-0">
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <h3 class="username text-white">Applicant Username</h3>
+                            <h3 class="username text-white">Team Members</h3>
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <h3 class="UsernameContainer username text-white">{{applicant.user.username}}</h3>
+                            <ul class="MemberList">
+                                {% for member in team.members.all %}
+                                <li class="text-white" data-username="{{member.user.username}}"><button class="RemovePerson btn btn-outline-danger btn-sm mx-2 mb-2">Remove</button>{{member.user.first_name}} {{member.user.last_name}}</li>
+                                {% empty %}
+                                <li class="NullMembers text-white">No Students on the Team</li>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="row">
                             <hr class="divider bg-dark mt-0">
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <h3 class="username text-white">Current Status: <span class="Status text-danger">{{applicant.AccountStatus}}</span></h3>
+                            <h3 class="username text-white">Add New Member to Team?</h3>
                         </div>
                         <div class="row d-flex justify-content-center mb-2">
-                            <button class="btn btn-outline-success mx-2 Activate">Activate</button>
-                            <button class="btn btn-outline-danger mx-2 Deny">Deny</button>
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chose a Member
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% for member in Members %}
+                                <button class="Member dropdown-item" href="#" data-username="{{member.user.username}}">{{member.user.first_name}} {{member.user.last_name}}</button>
+                                {% empty %}
+                                <button class="dropdown-item" href="#">No Members Found</button>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% empty %}
                 <div class="col-3 align-self-center mt-5 mx-2 rounded d-flex justify-content-center">
                     <div class="alert alert-danger">
-                        No Active Applications found.
+                        No Teams Active
                     </div>
                 </div>
                 {% endfor %}

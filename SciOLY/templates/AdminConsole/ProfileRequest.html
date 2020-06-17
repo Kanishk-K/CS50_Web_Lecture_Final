@@ -23,6 +23,7 @@
             <hr>
             <a href="{% url 'Applications' %}">Applying Users</a>
             <a href="{% url 'ProfileRequests' %}">Profile Requests</a>
+            <a href="{% url 'TeamManage' %}">Manage Teams</a>
         </div>   
         <div class="container-fluid px-0">
             <div class="row d-flex align-items-center bg-info mx-0">
@@ -47,7 +48,7 @@
         <div class="container-fluid px-0 mb-4 bg-light">
             <div class="row mx-0 d-flex justify-content-center">
                 {% for application in ProfileRequests %}
-                <div class="col-3 align-self-center mt-5 mx-2 bg-dark rounded d-flex justify-content-center">
+                <div class="col-3 align-self-center mt-3 mx-2 bg-dark rounded d-flex justify-content-center">
                     <div class="container-fluid">
                         <div class="row d-flex justify-content-center">
                             <h3 class="username text-white mt-2">Applicant Name</h3>

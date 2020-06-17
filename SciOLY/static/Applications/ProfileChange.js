@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded",function(){
             const ApplicationRequest = new XMLHttpRequest();
             ApplicationRequest.open("POST","/AdminPage/ProfileRequests");
             ApplicationRequest.onload = () => {
+                ActivateButton.parentElement.parentElement.parentElement.remove();
             }
             const ApplicationResponse = new FormData();
             ApplicationResponse.append("username",Username);
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded",function(){
             const ApplicationRequest = new XMLHttpRequest();
             ApplicationRequest.open("POST","/AdminPage/ProfileRequests");
             ApplicationRequest.onload = () => {
+                DenyButton.parentElement.parentElement.parentElement.remove();
             }
             const ApplicationResponse = new FormData();
             ApplicationResponse.append("username",Username);

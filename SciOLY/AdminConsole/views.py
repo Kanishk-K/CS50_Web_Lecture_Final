@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
-from MainPage.models import Member, ProfileRequest
+from MainPage.models import Member, ProfileRequest, Team
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import JsonResponse
 from django.conf import settings
 from django.conf.urls import static
 import os
+from django.views.decorators.http import require_http_methods
 
 
 # Create your views here.
@@ -70,3 +71,37 @@ def ProfileChangeRequest(request):
             return render(request, 'AdminConsole/ProfileRequest.html',context)
     else:
         return redirect('MainPage')
+
+def TeamDisplay(request):
+    if request.user.is_staff:
+        if request.method == "POST":
+            Teamname = request.POST.get("textfield")
+            NewTeam = Team(name=Teamname)
+            NewTeam.save()
+            context = {
+                "Teams":Team.objects.all(),
+                "Members": Member.objects.filter(AccountStatus="Activated"),
+            }
+            return render(request, 'AdminConsole/TeamManage.html',context)
+        else:
+            context = {
+                "Teams":Team.objects.all(),
+                "Members": Member.objects.filter(AccountStatus="Activated"),
+            }
+            return render(request, 'AdminConsole/TeamManage.html',context)
+    else:
+        return redirect('MainPage')
+
+@require_http_methods(["POST"])
+def TeamAdd(request):
+    intent = request.POST.get("intent")
+    TeamObject = Team.objects.get(name=request.POST.get("Teamname"))
+    if intent == "Remove":
+        MemberObject = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+        TeamObject.members.remove(MemberObject)
+    elif intent == "Add":
+        MemberObject = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+        TeamObject.members.add(MemberObject)
+    else:
+        TeamObject.delete()
+    return JsonResponse({"request":"Success"})

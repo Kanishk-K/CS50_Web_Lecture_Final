@@ -35,6 +35,8 @@ urlpatterns = [
     path('AdminPage/',Admin_views.index,name="AdminPage"),
     path('AdminPage/Applications',Admin_views.Applications,name="Applications"),
     path('AdminPage/ProfileRequests',Admin_views.ProfileChangeRequest,name="ProfileRequests"),
+    path('AdminPage/Teams',Admin_views.TeamDisplay,name="TeamManage"),
+    path('AdminPage/Teams/Submit',Admin_views.TeamAdd,name="ManageTeam")
 ]
 
 if settings.DEBUG:
