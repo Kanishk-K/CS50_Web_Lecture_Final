@@ -76,4 +76,14 @@ document.addEventListener('DOMContentLoaded', function(){
             TeamRequest.send(TeamResponse);
         })
     })
+    document.querySelector(".Logout").addEventListener("click",()=>{
+        const LogoutRequest = new XMLHttpRequest();
+        LogoutRequest.open("POST","/logout")
+        LogoutRequest.onload = () =>{
+            location.reload();
+        }
+        const LogoutResponse = new FormData();
+        LogoutResponse.append("csrfmiddlewaretoken",CSRFToken);
+        LogoutRequest.send(LogoutResponse);
+    })
 })

@@ -37,3 +37,8 @@ class Team(models.Model):
     
     def __str__(self):
         return f"{self.name}"
+
+class ProfileRequest(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profileimage = models.ImageField(default='/Person.png')
+    text = models.TextField(default="I am a member of the Eastview Science Olympiad Team. It's a really fun time to be a part of the team, the events are great and never are boring. Maybe you should join sometime.")

@@ -16,11 +16,16 @@
     <body class="bg-light">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
+            {% if Logged != True %}
             <a href="{% url 'apply' %}">Apply For The Team</a>
             <a href="{% url 'login' %}">Login</a>
+            {% else %}
+            <a href="#" class="Logout">Logout</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            {% endif %}
         </div>   
-        <div class="container-fluid">
-            <div class="row d-flex align-items-center bg-info">
+        <div class="container-fluid px-0">
+            <div class="row d-flex align-items-center bg-info mx-0">
                 <div class="col align-self-start">
                     <img src="{% static 'MainPage/EVHS_Logo.png' %}" class="Logo">
                 </div>
@@ -37,7 +42,7 @@
             </div>
         </div>
         <div class="container-fluid px-0">
-            <div class="row mx-0 bg-info d-flex justify-content-center" id="box-search">
+            <div class="row mx bg-info d-flex justify-content-center" id="box-search">
                 <div class="col-sm-12 col-md-10 px-0">
                     <div class="thumbnail text-center">
                         <img src="{% static 'MainPage/Slideshow/Image1.jpg'%}" alt="" class="img-responsive w-75">
@@ -63,17 +68,19 @@
         </div>
         <div class="container-fluid px-0 mt-2 mb-4 bg-light">
             <div class="row mx-0 d-flex justify-content-center">
+                {% for Capitan in Capitans %}
                 <div class="col-4 align-self-center mt-5">
                     <div class="row d-flex justify-content-center">
-                        <img src="{% static 'MainPage/Person.png' %}" class="img-responsive w-25">
+                        <img src="{{Capitan.profileimage.url}}" class="img-responsive w-25">
                     </div>
                     <div class="row d-flex justify-content-center">
                         <hr class="divider w-50">
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <h1 class="display title">Username</h1>
+                        <h1 class="display title">{{Capitan.user.first_name}} {{Capitan.user.last_name}}</h1>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
         <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-5">
@@ -131,19 +138,11 @@
             <div class="Info row align-items-start d-none">
                 <div class="col-6 d-flex justify-content-center text-left">
                     <ul class="Events">
-                        <li>Item#1</li>
-                        <li>Item#2</li>
-                        <li>Item#3</li>
-                        <li>Item#1</li>
-                        <li>Item#2</li>
-                        <li>Item#3</li>
+
                     </ul>
                 </div>
                 <div class="col-6 d-flex justify-content-center text-left">
                     <ul class="Awards">
-                        <li>Item#1</li>
-                        <li>Item#2</li>
-                        <li>Item#3</li>
                     </ul>
                 </div>
             </div>

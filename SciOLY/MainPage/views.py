@@ -7,9 +7,17 @@ from django.views.decorators.http import require_http_methods
 # Create your views here.
 def index(request):
     context = {
-        "Teams":Team.objects.all()
+        "Teams":Team.objects.all(),
+        "Logged":False,
+        "Capitans":Member.objects.filter(Is_Capitan=True)
     }
-    return render(request, "MainPage/index.html",context)
+    if request.user.is_authenticated:
+        print(f"User {request.user.username} has logged in")
+        context["Logged"] = True
+        return render(request, "MainPage/index.html",context)
+    else:
+        print("No login detected")
+        return render(request, "MainPage/index.html",context)
 
 @require_http_methods(["POST"])
 def UserInfo(request):

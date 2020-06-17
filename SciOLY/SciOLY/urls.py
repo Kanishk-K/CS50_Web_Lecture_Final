@@ -28,6 +28,8 @@ urlpatterns = [
     path('', MainPage.index, name="MainPage"),
     path('apply', users_view.register, name="apply"),
     path('login', users_view.login, name="login"),
+    path('logout',users_view.logout, name="logout"),
+    path('profile',users_view.profile,name="profile"),
     path('UserInfo',MainPage.UserInfo),
 ]
 
