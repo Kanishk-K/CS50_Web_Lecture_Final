@@ -3,6 +3,9 @@ from MainPage.models import Member, ProfileRequest
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import JsonResponse
+from django.conf import settings
+from django.conf.urls import static
+import os
 
 
 # Create your views here.
@@ -40,7 +43,26 @@ def Applications(request):
 def ProfileChangeRequest(request):
     if request.user.is_staff:
         if request.method == "POST":
-            return redirect('MainPage')
+            username = request.POST.get("username")
+            Person = Member.objects.get(user=User.objects.get(username=username))
+            PersonRequest = ProfileRequest.objects.get(user=User.objects.get(username=username))
+            if request.POST.get("intent") == "Activate":
+                if Person.profileimage.name != "/Person.png":
+                    print("Deleting")
+                    os.remove(os.path.join(settings.MEDIA_ROOT,Person.profileimage.name.replace("/","")))
+                    Person.profileimage = PersonRequest.profileimage
+                    Person.text = PersonRequest.text
+                    Person.save()
+                    PersonRequest.delete()
+                else:
+                    Person.profileimage = PersonRequest.profileimage
+                    Person.text = PersonRequest.text
+                    Person.save()
+                    PersonRequest.delete()
+            else:
+                PersonRequest.delete()
+                print("Deny Button Clicked")
+            return JsonResponse({"request":"Success"})
         else:
             context = {
                 "ProfileRequests":ProfileRequest.objects.all(),
