@@ -1,0 +1,93 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
+        <script src="{% static 'Applications/script.js' %}"></script>
+        <script src="{% static 'MainPage/script.js' %}"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body class="bg-light">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <a href="#" class="Logout">Logout</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'MainPage' %}">Home</a>
+            <hr>
+            <a href="{% url 'Applications' %}">Applying Users</a>
+            <a href="{% url 'ProfileRequests' %}">Profile Requests</a>
+        </div>   
+        <div class="container-fluid px-0">
+            <div class="row d-flex align-items-center bg-info mx-0">
+                <div class="col align-self-start">
+                    <img src="{% static 'MainPage/EVHS_Logo.png' %}" class="Logo">
+                </div>
+                <div class="col align-self-center">
+                    {% if messages %}
+                        {% for message in messages%}
+                        <div class="alert alert-{{ message.tags }}">{{message}}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col align-self-end justify-content-end">
+                    <button class="Menu btn btn-info float-right"><img src="{% static 'MainPage/Menu.png' %}" class="Logo"></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
+            <h1 class="display title">Active Applications</h1>
+        </div>
+        <div class="container-fluid px-0 mb-4 bg-light">
+            <div class="row mx-0 d-flex justify-content-center">
+                {% for applicant in Applicants %}
+                <div class="col-3 align-self-center mt-5 mx-2 bg-dark rounded d-flex justify-content-center">
+                    <div class="container-fluid">
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white mt-2">Applicant Name</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">{{applicant.user.first_name}} {{applicant.user.last_name}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">Applicant Username</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="UsernameContainer username text-white">{{applicant.user.username}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">Current Status: <span class="Status text-danger">{{applicant.AccountStatus}}</span></h3>
+                        </div>
+                        <div class="row d-flex justify-content-center mb-2">
+                            <button class="btn btn-outline-success mx-2 Activate">Activate</button>
+                            <button class="btn btn-outline-danger mx-2 Deny">Deny</button>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-3 align-self-center mt-5 mx-2 rounded d-flex justify-content-center">
+                    <div class="alert alert-danger">
+                        No Active Applications found.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
+    </body>
+</html>

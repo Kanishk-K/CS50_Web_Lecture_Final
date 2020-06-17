@@ -38,7 +38,7 @@ def login(request):
                 messages.success(request,f"Login was successful, {username} authenticated.")
                 return redirect('MainPage')
             else:
-                messages.warning(request,f"Login for {username} was unsuccessful")
+                messages.warning(request,f"{username}'s account has been marked as {AuthenticateStatus.AccountStatus}.")
                 return render(request,'users/register.html',{"form":form,"intent":"login"})
     else:
         form = AuthenticationForm()

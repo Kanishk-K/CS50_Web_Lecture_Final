@@ -8,12 +8,12 @@ from django.views.decorators.http import require_http_methods
 def index(request):
     context = {
         "Teams":Team.objects.all(),
-        "Logged":False,
+        "Logged":request.user.is_authenticated,
+        "Admin":request.user.is_staff,
         "Capitans":Member.objects.filter(Is_Capitan=True)
     }
     if request.user.is_authenticated:
         print(f"User {request.user.username} has logged in")
-        context["Logged"] = True
         return render(request, "MainPage/index.html",context)
     else:
         print("No login detected")

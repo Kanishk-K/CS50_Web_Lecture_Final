@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from MainPage import views as MainPage
+from users import views as users_view
+from AdminConsole import views as Admin_views
 from django.urls import path
 from django.conf.urls import url
-from users import views as users_view
 from django.contrib.auth import views as auth_views
 
 from django.conf import settings
@@ -31,6 +32,9 @@ urlpatterns = [
     path('logout',users_view.logout, name="logout"),
     path('profile',users_view.profile,name="profile"),
     path('UserInfo',MainPage.UserInfo),
+    path('AdminPage/',Admin_views.index,name="AdminPage"),
+    path('AdminPage/Applications',Admin_views.Applications,name="Applications"),
+    path('AdminPage/ProfileRequests',Admin_views.ProfileChangeRequest,name="ProfileRequests"),
 ]
 
 if settings.DEBUG:

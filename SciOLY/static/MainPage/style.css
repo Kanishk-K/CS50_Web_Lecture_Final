@@ -9,6 +9,10 @@
   font-size: medium;
   font-family: 'BioRhyme','serif';
 }
+.username{
+  font-size: small;
+  font-family: 'BioRhyme','serif';
+}
 .under {
   border-bottom: 3px dotted rgba(0,0,0,0.51);
   padding-bottom: 1%;
@@ -37,6 +41,10 @@ hr.divider {
     .sidenav a {font-size: 18px;}
     .caption h1, .title{
       font-size: x-large;
+    }
+    .username{
+      font-size: medium;
+      font-family: 'BioRhyme','serif';
     }
     p{
       font-size: large;
@@ -110,6 +118,11 @@ hr.divider {
   right: 10px;
   font-size: 36px;
   margin-left: 50px;
+}
+.sidenav hr {
+  width:75%;
+  background-color: black;
+  border-top: 2px dashed white;
 }
 .thumbnail {
   position: relative;
