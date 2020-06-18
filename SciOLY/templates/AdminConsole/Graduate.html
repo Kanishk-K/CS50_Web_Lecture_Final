@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
+        <script src="{% static 'Applications/Graduate.js' %}"></script>
         <script src="{% static 'MainPage/script.js' %}"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -23,9 +24,6 @@
             <a href="{% url 'Applications' %}">Applying Users</a>
             <a href="{% url 'ProfileRequests' %}">Profile Requests</a>
             <a href="{% url 'TeamManage' %}">Manage Teams</a>
-            <a href="{% url 'Graduate' %}">Graduate Students</a>
-            <a href="#">Set Homepage Alert</a>
-            <a href="#">Student Manager</a>
         </div>   
         <div class="container-fluid px-0">
             <div class="row d-flex align-items-center bg-info mx-0">
@@ -45,21 +43,49 @@
             </div>
         </div>
         <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
-            <h1 class="display title">Welcome Back</h1>
+            <h1 class="display title">Graduate Students</h1>
         </div>
-        <div class="container-fluid px-0 mt-2 mb-4 bg-light">
+        <div class="container-fluid px-0 mb-4 bg-light">
             <div class="row mx-0 d-flex justify-content-center">
-                <div class="col-4 align-self-center mt-5">
-                    <div class="row d-flex justify-content-center">
-                        <img src="{{ImageLink}}" class="img-responsive w-25">
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <hr class="divider w-50">
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <h1 class="display title">{{FirstName}} {{LastName}}</h1>
+                {% for member in Members %}
+                <div class="col-3 align-self-center mt-3 mx-2 bg-dark rounded d-flex justify-content-center">
+                    <div class="container-fluid">
+                        <div class="row d-flex justify-content-center">
+                            <img src="{{member.profileimage.url}}" class="img-responsive w-25 bg-light mt-2 rounded">
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">Member Name</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">{{member.user.first_name}} {{member.user.last_name}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">Member Username</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="UsernameContainer username text-white">{{member.user.username}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center mb-2 mt-2">
+                            <button class="btn btn-outline-success mx-2 Activate">Graduate</button>
+                        </div>
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-3 align-self-center mt-5 mx-2 rounded d-flex justify-content-center">
+                    <div class="alert alert-danger">
+                        No Active Members Found
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls import static
 import os
 from django.views.decorators.http import require_http_methods
+from django.contrib import messages
 
 
 # Create your views here.
@@ -76,8 +77,11 @@ def TeamDisplay(request):
     if request.user.is_staff:
         if request.method == "POST":
             Teamname = request.POST.get("textfield")
-            NewTeam = Team(name=Teamname)
-            NewTeam.save()
+            if Team.objects.filter(name=Teamname).count() == 0:
+                NewTeam = Team(name=Teamname)
+                NewTeam.save()
+            else:
+                messages.warning(request,f"Sorry, a team by the name {Teamname} already exists")
             context = {
                 "Teams":Team.objects.all(),
                 "Members": Member.objects.filter(AccountStatus="Activated"),
@@ -105,3 +109,18 @@ def TeamAdd(request):
     else:
         TeamObject.delete()
     return JsonResponse({"request":"Success"})
+
+def Graduate(request):
+    if request.user.is_staff:
+        if request.method == "POST":
+            Person = Member.objects.get(user=User.objects.get(username=request.POST.get("username")))
+            Person.AccountStatus = "Alumni"
+            Person.save()
+            return JsonResponse({"request":"Success"})
+        else:
+            context = {
+                "Members":Member.objects.filter(AccountStatus="Activated")
+            }
+            return render(request,'AdminConsole/Graduate.html',context)
+    else:
+        return redirect('MainPage')
