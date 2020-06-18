@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from MainPage.models import Member, ProfileRequest, Team
+from MainPage.models import Member, ProfileRequest, Team, Alert
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import JsonResponse
@@ -122,5 +122,40 @@ def Graduate(request):
                 "Members":Member.objects.filter(AccountStatus="Activated")
             }
             return render(request,'AdminConsole/Graduate.html',context)
+    else:
+        return redirect('MainPage')
+
+def AlertAdd(request):
+    if request.user.is_staff:
+        if request.method == "POST":
+            print(len(request.POST.get("textfield")))
+            if Alert.objects.all().count() == 0:
+                newAlert = Alert()
+            else:
+                newAlert = Alert.objects.all().first()
+            if request.POST.get("checkbox",False)=="on":
+                newAlert.active = True
+            else:
+                newAlert.active = False
+            if len(request.POST.get("textfield")) == 0:
+                newAlert.text = ""
+            else:
+                newAlert.text = request.POST.get("textfield")
+            newAlert.save()
+            messages.success(request,f"Alert was successfully updated.")
+
+            context = {
+                "Alert":newAlert
+            }
+            return render(request,'AdminConsole/Alert.html',context)
+        else:
+            if Alert.objects.all().count() == 0:
+                newAlert = Alert()
+            else:
+                newAlert = Alert.objects.all().first()
+            context = {
+                "Alert":newAlert
+            }
+            return render(request,'AdminConsole/Alert.html',context)
     else:
         return redirect('MainPage')

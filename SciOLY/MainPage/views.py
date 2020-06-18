@@ -10,7 +10,8 @@ def index(request):
         "Teams":Team.objects.all(),
         "Logged":request.user.is_authenticated,
         "Admin":request.user.is_staff,
-        "Capitans":Member.objects.filter(Is_Capitan=True)
+        "Capitans":Member.objects.filter(Is_Capitan=True),
+        "Alert":Alert.objects.all().first()
     }
     if request.user.is_authenticated:
         print(f"User {request.user.username} has logged in")

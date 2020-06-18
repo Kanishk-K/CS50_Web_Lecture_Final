@@ -38,6 +38,7 @@ urlpatterns = [
     path('AdminPage/Teams',Admin_views.TeamDisplay,name="TeamManage"),
     path('AdminPage/Teams/Submit',Admin_views.TeamAdd,name="ManageTeam"),
     path('AdminPage/Graduate',Admin_views.Graduate,name="Graduate"),
+    path('AdminPage/Alert',Admin_views.AlertAdd,name="Alert"),
 ]
 
 if settings.DEBUG:

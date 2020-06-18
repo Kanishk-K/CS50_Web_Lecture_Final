@@ -42,3 +42,7 @@ class ProfileRequest(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     profileimage = models.ImageField(default='/Person.png')
     text = models.TextField(default="I am a member of the Eastview Science Olympiad Team. It's a really fun time to be a part of the team, the events are great and never are boring. Maybe you should join sometime.")
+
+class Alert(models.Model):
+    text = models.TextField(blank=True)
+    active = models.BooleanField(default=False)

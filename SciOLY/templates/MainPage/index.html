@@ -56,16 +56,18 @@
                     </div>
                 </div>
             </div>
+            {% if Alert.active %}
             <div class="row" style="background:#fff3cd;">
                 <div class="col-1 px-0 align-self-start">
                     <img src="{% static 'MainPage/Alert.png'%}" class="Alert img-responsive w-100">
                 </div>
                 <div class="col-11 px-0 align-self-end align-items-center">
                     <div class="alert alert-warning d-flex">
-                        <b>There's currently an alert present, please be cautious. Coronavirus has stopped the season and meetings have been adjourned</b>
+                        <b>{{Alert.text}}</b>
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
         <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3">
             <h1 class="display title">Coaches and Team Captains</h1>
