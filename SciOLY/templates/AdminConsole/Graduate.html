@@ -51,7 +51,7 @@
         <div class="container-fluid px-0 mb-4 bg-light">
             <div class="row mx-0 d-flex justify-content-center">
                 {% for member in Members %}
-                <div class="col-3 align-self-center mt-3 mx-2 bg-dark rounded d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 align-self-center mt-3 mx-2 bg-dark rounded d-flex justify-content-center">
                     <div class="container-fluid">
                         <div class="row d-flex justify-content-center">
                             <img src="{{member.profileimage.url}}" class="img-responsive w-25 bg-light mt-2 rounded">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 {% empty %}
-                <div class="col-3 align-self-center mt-5 mx-2 rounded d-flex justify-content-center">
+                <div class="col-md-3 col-sm-6 align-self-center mt-5 mx-2 rounded d-flex justify-content-center">
                     <div class="alert alert-danger">
                         No Active Members Found
                     </div>
