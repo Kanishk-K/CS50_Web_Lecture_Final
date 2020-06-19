@@ -1,0 +1,168 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
+        <script src="{% static 'Applications/StudentManager.js' %}"></script>
+        <script src="{% static 'MainPage/script.js' %}"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body class="bg-light">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <a href="#" class="Logout">Logout</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'MainPage' %}">Home</a>
+            <hr>
+            <a href="{% url 'Applications' %}">Applying Users</a>
+            <a href="{% url 'ProfileRequests' %}">Profile Requests</a>
+            <a href="{% url 'TeamManage' %}">Manage Teams</a>
+            <a href="{% url 'Graduate' %}">Graduate Students</a>
+            <a href="{% url 'Alert' %}">Set Homepage Alert</a>
+            <a href="{% url 'StudentManager' %}">Student Manager</a>
+        </div>   
+        <div class="container-fluid px-0">
+            <div class="row d-flex align-items-center bg-info mx-0">
+                <div class="col align-self-start">
+                    <img src="{% static 'MainPage/EVHS_Logo.png' %}" class="Logo">
+                </div>
+                <div class="col align-self-center">
+                    {% if messages %}
+                        {% for message in messages%}
+                        <div class="alert alert-{{ message.tags }}">{{message}}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col align-self-end justify-content-end">
+                    <button class="Menu btn btn-info float-right"><img src="{% static 'MainPage/Menu.png' %}" class="Logo"></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-light d-flex justify-content-center px-0 mt-3 mb-2">
+            <div class="col-md-4 col-sm-6">
+                <div class="container-fluid bg-dark text-white rounded">
+                    <div class="row d-flex justify-content-center">
+                        <h1 class="display title mt-2">Create New Event</h1>
+                    </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <input type="text" class="form-control w-75">
+                    </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <button class="EventButton btn btn-outline-success mb-2">Add Event</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="container-fluid bg-dark text-white rounded">
+                    <div class="row d-flex justify-content-center">
+                        <h1 class="display title mt-2">Create New Award</h1>
+                    </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <input type="text" class="form-control w-75">
+                    </div>
+                    <div class="row d-flex justify-content-center mt-2">
+                        <button class="AwardButton btn btn-outline-success mb-2">Add Award</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="divider">
+        <div class="container-fluid px-0 mb-4 bg-light">
+            <div class="row mx-0 d-flex justify-content-center">
+                {% for member in Members %}
+                <div class="col-md-4 col-sm-6 align-self-center mt-2 mx-2 bg-dark rounded d-flex justify-content-center">
+                    <div class="container-fluid">
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white mt-2">Name</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">{{member.user.first_name}} {{member.user.last_name}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="username text-white">Username</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <h3 class="UsernameContainer username text-white">{{member.user.username}}</h3>
+                        </div>
+                        <div class="row">
+                            <hr class="divider bg-dark mt-0">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col w-50">
+                                <div class="container-fluid text-white">
+                                    <div class="row d-flex justify-content-center">
+                                        <h6 class="username">Events</h6>
+                                    </div>
+                                    <div class="row d-flex justify-content-center">
+                                        <ul>
+                                            {% for event in member.events.all %}
+                                            <li class="row mt-2"><button class="EventDelete btn btn-outline-danger w-25 d-flex justify-content-center mr-2"><img src="{% static 'Applications/close.png' %}"></button>{{event.name}}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <hr class="divider bg-dark">
+                                    <div class="row d-flex justify-content-center mb-2">
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add Event
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            {% for event in Events %}
+                                            <button class="ButtonList dropdown-item" href="#">{{event.name}}</button>
+                                            {% endfor %}
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col w-50">
+                                <div class="container-fluid text-white">
+                                    <div class="row d-flex justify-content-center">
+                                        <h6 class="username">Awards</h6>
+                                    </div>
+                                    <div class="row d-flex justify-content-center">
+                                        <ul class="">
+                                            {% for award in member.awards.all %}
+                                            <li class="row mt-2"><button class="AwardDelete btn btn-outline-danger w-25 d-flex justify-content-center mr-2"><img src="{% static 'Applications/close.png' %}"></button>{{award.name}}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <hr class="divider bg-dark">
+                                    <div class="row d-flex justify-content-center mb-2">
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Add Award
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            {% for award in Awards %}
+                                            <button class="AwardList dropdown-item" href="#">{{award.name}}</button>
+                                            {% endfor %}
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-md-3 col-sm-6 align-self-center mt-2 mx-2 rounded d-flex justify-content-center">
+                    <div class="alert alert-danger">
+                        No Activated Members found.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
+    </body>
+</html>

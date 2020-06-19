@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from MainPage.models import Member, ProfileRequest, Team, Alert
+from MainPage.models import Member, ProfileRequest, Team, Alert, Event, Award
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import JsonResponse
@@ -157,5 +157,42 @@ def AlertAdd(request):
                 "Alert":newAlert
             }
             return render(request,'AdminConsole/Alert.html',context)
+    else:
+        return redirect('MainPage')
+
+def StudentManager(request):
+    if request.user.is_staff:
+        if request.method == "POST":
+            if request.POST.get("Intent") == "NewEvent":
+                newEvent = Event(name=request.POST.get("EventName"))
+                newEvent.save()
+                return JsonResponse({"request":"Success"})
+            elif request.POST.get("Intent") == "NewAward":
+                newAward = Award(name=request.POST.get("AwardName"))
+                newAward.save()
+                return JsonResponse({"request":"Success"})
+            elif request.POST.get("Intent") == "DeleteEvent":
+                Person = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+                Person.events.remove(Event.objects.get(name=request.POST.get("EventName")))
+                return JsonResponse({"request":"Success"})
+            elif request.POST.get("Intent") == "DeleteAward":
+                Person = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+                Person.awards.remove(Award.objects.get(name=request.POST.get("AwardName")))
+                return JsonResponse({"request":"Success"})
+            elif request.POST.get("Intent") == "AddEvent":
+                Person = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+                Person.events.add(Event.objects.get(name=request.POST.get("EventName")))
+                return JsonResponse({"request":"Success"})
+            elif request.POST.get("Intent") == "AddAward":
+                Person = Member.objects.get(user=User.objects.get(username=request.POST.get("Username")))
+                Person.awards.add(Award.objects.get(name=request.POST.get("AwardName")))
+                return JsonResponse({"request":"Success"})
+        else:
+            context = {
+                "Members":Member.objects.filter(AccountStatus="Activated"),
+                "Events":Event.objects.all(),
+                "Awards":Award.objects.all(),
+            }
+            return render(request,'AdminConsole/StudentManager.html',context)
     else:
         return redirect('MainPage')

@@ -8,7 +8,6 @@
         <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'MainPage/style.css' %}">
-        <script src="{% static 'Applications/Graduate.js' %}"></script>
         <script src="{% static 'MainPage/script.js' %}"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -24,6 +23,9 @@
             <a href="{% url 'Applications' %}">Applying Users</a>
             <a href="{% url 'ProfileRequests' %}">Profile Requests</a>
             <a href="{% url 'TeamManage' %}">Manage Teams</a>
+            <a href="{% url 'Graduate' %}">Graduate Students</a>
+            <a href="{% url 'Alert' %}">Set Homepage Alert</a>
+            <a href="{% url 'StudentManager' %}">Student Manager</a>
         </div>   
         <div class="container-fluid px-0">
             <div class="row d-flex align-items-center bg-info mx-0">
