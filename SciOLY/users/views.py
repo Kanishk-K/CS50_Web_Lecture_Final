@@ -33,7 +33,7 @@ def login(request):
             username = form.get_user()
             Person = User.objects.get(username=username)
             AuthenticateStatus = Member.objects.get(user=Person)
-            if AuthenticateStatus.AccountStatus == "Activated":
+            if AuthenticateStatus.AccountStatus == "Activated" or Person.is_staff:
                 login_command(request,username)
                 messages.success(request,f"Login was successful, {username} authenticated.")
                 return redirect('MainPage')
