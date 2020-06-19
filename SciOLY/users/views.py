@@ -14,6 +14,7 @@ from django.core.files.storage import FileSystemStorage
 
 def register(request):
     if request.method == 'POST':
+        #If the user has submitted a register form create an application.
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
@@ -28,6 +29,7 @@ def register(request):
     return render(request, 'users/register.html',{'form':form,"intent":"apply"})
 def login(request):
     if request.method == 'POST':
+        #If the user has attempted a login, only allow them in if they are either staff or an activated account.
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = form.get_user()
@@ -44,6 +46,7 @@ def login(request):
         form = AuthenticationForm()
     return render(request,'users/register.html',{"form":form,"intent":"login"})
 def logout(request):
+    #Logout the user and take them back to the homepage.
     if request.method == "POST":
         print("Logout called")
         logout_command(request)
@@ -74,6 +77,7 @@ def profile(request):
             messages.success(request,f"{username} a request has been submitted successfully")
             return render(request,'users/profile.html',context)
         else:
+            #If a change request is present in the system inform the user of this.
             username = request.user.username
             Person = Member.objects.get(user=User.objects.get(username=username))
             context = {
@@ -85,6 +89,7 @@ def profile(request):
             return render(request,'users/profile.html',context)
     else:
         if request.user.is_authenticated:
+            #Only display the profile change page if the user accessing is logged in.
             username = request.user.username
             Person = Member.objects.get(user=User.objects.get(username=username))
             context = {

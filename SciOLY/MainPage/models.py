@@ -29,7 +29,7 @@ class Member(models.Model):
     AccountStatus = models.CharField(max_length=11,choices=AccStatus,default="Inactivated")
 
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 class Team(models.Model):
     name = models.CharField(max_length=64)

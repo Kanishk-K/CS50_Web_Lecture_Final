@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
     RemoveTeamButtons.forEach((RemoveTeamButton)=>{
         RemoveTeamButton.addEventListener("click",()=>{
+            //For each remove button, if it's clicked remove the team from the server.
             RemoveTeamname = RemoveTeamButton.parentElement.dataset.teamname;
             const TeamRemoveRequest = new XMLHttpRequest();
             TeamRemoveRequest.open("POST","/AdminPage/Teams/Submit");
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
     RemoveButtons.forEach((RemoveButton)=>{
         RemoveButton.addEventListener("click",()=>{
+            //If this button is clicked, remove the user from the team. 
             Username = RemoveButton.parentElement.dataset.username;
             Teamname = RemoveButton.parentElement.parentElement.parentElement.parentElement.querySelector(".Teamname").dataset.teamname;
             const TeamRequest = new XMLHttpRequest();
@@ -45,6 +47,7 @@ document.addEventListener("DOMContentLoaded",function(){
     })
     MemberButtons.forEach((MemberButton)=>{
         MemberButton.addEventListener("click",()=>{
+            //If this button is clicked then add the user to the screen, dynamically generate remove buttons.
             Username = MemberButton.dataset.username;
             Teamname = MemberButton.parentElement.parentElement.parentElement.querySelector(".Teamname").dataset.teamname;
             const MemberRequest = new XMLHttpRequest();
@@ -57,6 +60,7 @@ document.addEventListener("DOMContentLoaded",function(){
                 newRemoveButton.className = "RemovePerson btn btn-outline-danger btn-sm mx-2 mb-2";
                 newRemoveButton.innerText = "Remove";
                 newRemoveButton.onclick = () => {
+                    //If the dynamically generated remove button is clicked then remove the user from the team.
                     ButtonUsername = newRemoveButton.parentElement.dataset.username;
                     ButtonTeamname = newRemoveButton.parentElement.parentElement.parentElement.parentElement.querySelector(".Teamname").innerText;
                     const TeamRequest = new XMLHttpRequest();

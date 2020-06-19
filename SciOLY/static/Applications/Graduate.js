@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
     ActivateButtons.forEach((ActivateButton) => {
         ActivateButton.addEventListener("click",()=>{
-            //What to do when any activate button is clicked.
+            //When any graduate button is clicked, send that data to update the user on the server.
             const Username = ActivateButton.parentElement.parentElement.querySelector(".UsernameContainer").innerText;
             const ApplicationRequest = new XMLHttpRequest();
             ApplicationRequest.open("POST","/AdminPage/Graduate");

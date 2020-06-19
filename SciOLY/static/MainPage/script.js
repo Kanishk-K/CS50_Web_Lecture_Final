@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const UserDropdown = document.querySelector(".Users")
     const CSRFToken = document.querySelector("input[name='csrfmiddlewaretoken']").value;
 
+    //Code that manages the transition of the side select menu, hence its apperence in almost all html pages.
     MenuButton.addEventListener('click', ()=>{
         document.getElementById("mySidenav").style.width = "250px";
     })

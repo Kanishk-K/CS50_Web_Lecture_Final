@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
     ActivateButtons.forEach((ActivateButton) => {
         ActivateButton.addEventListener("click",()=>{
-            //What to do when any activate button is clicked.
+            //When any accept button is clicked, send the username to the server
             const Username = ActivateButton.parentElement.parentElement.querySelector(".UsernameContainer").innerText;
             const ApplicationRequest = new XMLHttpRequest();
             ApplicationRequest.open("POST","/AdminPage/ProfileRequests");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded",function(){
     })
     DenyButtons.forEach((DenyButton)=>{
         DenyButton.addEventListener("click",()=>{
-            //What to do when any deny button is clicked.
+            //When any deny button is clicked, send the username to the server.
             const Username = DenyButton.parentElement.parentElement.querySelector(".UsernameContainer").innerText;
             const ApplicationRequest = new XMLHttpRequest();
             ApplicationRequest.open("POST","/AdminPage/ProfileRequests");

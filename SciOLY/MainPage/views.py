@@ -14,23 +14,21 @@ def index(request):
         "Alert":Alert.objects.all().first()
     }
     if request.user.is_authenticated:
-        print(f"User {request.user.username} has logged in")
         return render(request, "MainPage/index.html",context)
     else:
-        print("No login detected")
         return render(request, "MainPage/index.html",context)
 
 @require_http_methods(["POST"])
 def UserInfo(request):
+    #If the user selected a team, render all members in that team.
     if request.POST.get("Type") == "Team":
-        print("Team Sent")
         T = Team.objects.filter(name=request.POST.get("Team")).first()
         AllUsernames = []
         for Person in T.members.all():
             AllUsernames.append(Person.user.username)
         return JsonResponse(AllUsernames,safe=False)
     else:
-        print("User Sent")
+        #The user selected a member, render information about the member.
         AllMembers = Member.objects.all()
         for Person in AllMembers:
             if Person.user.username == request.POST.get("Member"):
